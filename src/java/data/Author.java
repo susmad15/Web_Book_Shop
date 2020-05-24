@@ -22,8 +22,6 @@ import javax.xml.bind.annotation.XmlType;
 @NamedQueries({
     @NamedQuery(name = "Author.findByLastName",
             query = "SELECT a FROM Author a WHERE a.lastname LIKE :lastname ORDER BY a.lastname"),
-
-    @NamedQuery(name = "Author.getAll", query = "SELECT DISTINCT a FROM Author a ORDER BY a.lastname"),
         
     @NamedQuery(name = "Author.getWithName", query = "SELECT DISTINCT a FROM Author a WHERE a.lastname = :lastname")
 })
@@ -42,11 +40,6 @@ public class Author {
     private String url;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "book_authors", joinColumns = {
-        @JoinColumn(name = "author_id", referencedColumnName = "authorId")
-    }, inverseJoinColumns = {
-        @JoinColumn(name = "book_id", referencedColumnName = "bookId")
-    })
     private List<Book> booklist;
 
     public Author() {

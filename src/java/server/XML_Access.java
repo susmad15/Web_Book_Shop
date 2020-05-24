@@ -38,7 +38,7 @@ public class XML_Access {
 
         List<Author> authors = new ArrayList<>();
 
-        for (Publisher pub : shop.getPublisherlist()) {
+        /*for (Publisher pub : shop.getPublisherlist()) {
             pub.setBs(shop);
             for (Book book : pub.getBooklist()) {
                 book.setPublisher(pub);
@@ -51,6 +51,26 @@ public class XML_Access {
                         book.getAuthorlist().set(index, obj);
                     }
                     author.getBooklist().add(book);
+                }
+            }
+        }*/
+        
+        for(Publisher pub : shop.getPublisherlist()) {
+            pub.setBs(shop);
+            for(Book book : pub.getBooklist()) {
+                book.setPublisher(pub);
+                for(Author author : book.getAuthorlist()) {
+                    if(!authors.contains(author)) {
+                        authors.add(author);
+                    } else {
+                        int index = book.getAuthorlist().indexOf(author);
+                        Author a = authors.get(authors.indexOf(author));
+                        book.getAuthorlist().set(index, a);
+                    }
+                    
+                    author.getBooklist().add(book);
+                    
+                    
                 }
             }
         }

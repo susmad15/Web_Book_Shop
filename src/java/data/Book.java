@@ -7,25 +7,20 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @NamedQuery(name = "Book.findByAuthor",
-        query="SELECT b FROM Book b JOIN b.authorlist list JOIN Author a WHERE a.lastname = :lastname")
+        //query="SELECT b FROM Book b JOIN b.authorlist list JOIN Author a WHERE a.lastname = :lastname")
+        query = "SELECT b FROM Book b, Author a WHERE a.lastname = :lastname")
 @XmlType(propOrder = {"bookId", "title", "url", "price", "isbn", "authorlist"})
 public class Book {
 
